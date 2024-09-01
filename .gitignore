@@ -1,0 +1,9 @@
+.env
+private_key.pem
+test.py
+notes.txt
+__pycache__/
+env/
+venv/
+_venv/
+_env/
