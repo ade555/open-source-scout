@@ -1,6 +1,6 @@
 from telegram import BotCommand
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, filters
-from config import TOKEN, CHOOSING, TYPING_REPLY, WEBHOOK_URL
+from config import TOKEN, CHOOSING, TYPING_REPLY, WEBHOOK_URL, PORT
 from bot.handlers.start_handler import start
 from bot.handlers.button_handler import button
 from bot.handlers.custom_search_handler import custom_search
@@ -31,7 +31,7 @@ def main() -> None:
     
     application.run_webhook(
         listen="0.0.0.0",
-        port=8443,
+        port=PORT,
         url_path=TOKEN,
         webhook_url=webhook_url
     )
