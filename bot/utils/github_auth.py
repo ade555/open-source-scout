@@ -26,26 +26,27 @@ def create_jwt(app_id, private_key_path):
 
 
 
-# def get_installation_id(jwt_token):
+def get_installation_id(jwt_token):
     """
     helper function to get an installation ID. You will typically only need to run this once.
     """
     
-#     headers = {
-#         'Authorization': f'Bearer {jwt_token}',
-#         'Accept': 'application/vnd.github.v3+json'
-#     }
-#     response = requests.get(
-#         'https://api.github.com/app/installations',
-#         headers=headers
-#     )
-#     if response.status_code != 200:
-#         raise Exception(f"Failed to get installations: {response.status_code}, {response.text}")
+    headers = {
+         'Authorization': f'Bearer {jwt_token}',
+         'Accept': 'application/vnd.github.v3+json'
+    }
+    response = requests.get(
+         'https://api.github.com/app/installations',
+         headers=headers
+    )
+    if response.status_code != 200:
+        raise Exception(f"Failed to get installations: {response.status_code}, {response.text}")
     
-#     installations = response.json()
-#     if not installations:
-#         raise Exception("No installations found for this GitHub App")
-#     return installations[0]['id']
+    installations = response.json()
+    if not installations:
+        raise Exception("No installations found for this GitHub App")
+    
+    return installations[0]['id']
 
 
 
