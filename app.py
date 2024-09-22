@@ -6,14 +6,13 @@ from bot.handlers.button_handler import button
 from bot.handlers.custom_search_handler import custom_search
 import asyncio
 
-async def main() -> None:
+def main() -> None:
     webhook_url=f"{WEBHOOK_URL}/{TOKEN}"
     application = Application.builder().token(TOKEN).build()
-    
     commands = [
         BotCommand(command="start", description="Start interacting with the bot"),
     ]
-    await application.bot.set_my_commands(commands)  # Await this call
+    application.bot.set_my_commands(commands)
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -26,9 +25,12 @@ async def main() -> None:
 
     application.add_handler(conv_handler)
 
-    await application.bot.set_webhook(url=webhook_url)
+    application.bot.set_webhook(url=webhook_url)
 
-    await application.run_webhook(
+    # use this locally
+    # application.run_polling()
+    
+    application.run_webhook(
         listen="0.0.0.0",
         port=PORT,
         url_path=TOKEN,
@@ -36,4 +38,4 @@ async def main() -> None:
     )
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
